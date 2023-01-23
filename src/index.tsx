@@ -1,16 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import "./Style/index.css";
+import App from "./Layout/App";
+import reportWebVitals from "./Other/reportWebVitals";
+import { Loader } from "@react-three/drei";
+import { Provider } from "react-redux";
+import store from "./Data/store";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <Suspense fallback={<Loader />}>
+      <App />
+    </Suspense>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
