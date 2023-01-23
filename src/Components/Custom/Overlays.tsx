@@ -4,39 +4,195 @@ import {
   IconButton,
   AppBar,
   Toolbar,
-  Typography,
+  Link,
+  Divider,
 } from "@mui/material";
 import { GitHub, Instagram, Email, LinkedIn } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 
-interface Props {}
+interface Props {
+  noTopNav?: boolean;
+}
 
-const HomeOverlay: React.FC<Props> = () => {
+const Overlay: React.FC<Props> = ({ noTopNav = false }) => {
+  if (noTopNav) {
+    return (
+      <Container
+        sx={{
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          position: "absolute",
+          top: 0,
+          padding: "1em",
+        }}
+        disableGutters
+        maxWidth={false}
+      >
+        <AppBar
+          color="transparent"
+          position="relative"
+          sx={{ top: 0, boxShadow: "none" }}
+        >
+          <Toolbar>
+            <Container
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+              maxWidth={false}
+            >
+              <Link
+                href="/"
+                children="KEI HARTLEY"
+                color="text.primary"
+                underline="none"
+                variant="h6"
+                sx={{ pointerEvents: "all" }}
+              />
+              <Stack direction="row" spacing={2}>
+                <Tooltip
+                  title="Github"
+                  arrow
+                  sx={{ pointerEvents: "all" }}
+                  children={
+                    <IconButton color="secondary">
+                      <GitHub />
+                    </IconButton>
+                  }
+                />
+                <Tooltip
+                  title="LinkedIn"
+                  arrow
+                  sx={{ pointerEvents: "all" }}
+                  children={
+                    <IconButton color="secondary">
+                      <LinkedIn />
+                    </IconButton>
+                  }
+                />
+                <Tooltip
+                  title="Email"
+                  arrow
+                  sx={{ pointerEvents: "all" }}
+                  children={
+                    <IconButton color="secondary">
+                      <Email />
+                    </IconButton>
+                  }
+                />
+                <Tooltip
+                  title="Instagram"
+                  arrow
+                  sx={{ pointerEvents: "all" }}
+                  children={
+                    <IconButton color="secondary">
+                      <Instagram />
+                    </IconButton>
+                  }
+                />
+                <Divider orientation="vertical" />
+                <Tooltip
+                  title="Instagram"
+                  arrow
+                  sx={{ pointerEvents: "all" }}
+                  children={
+                    <IconButton color="secondary">
+                      <Instagram />
+                    </IconButton>
+                  }
+                />
+              </Stack>
+            </Container>
+          </Toolbar>
+        </AppBar>
+      </Container>
+    );
+  }
+
   return (
     <Container
       sx={{
         width: "100%",
         height: "100%",
+        pointerEvents: "none",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         position: "absolute",
         top: 0,
+        padding: "1em",
       }}
       disableGutters
       maxWidth={false}
     >
       <AppBar
         color="transparent"
-        position="relative"
+        position="sticky"
         sx={{ top: 0, boxShadow: "none" }}
       >
         <Toolbar>
-          <Typography
-            children="KEI HARTLEY"
-            color="#ffffff"
-            variant="subtitle1"
-          />
+          <Container
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+            maxWidth={false}
+          >
+            <Link
+              href="/"
+              children="KEI HARTLEY"
+              color="text.primary"
+              underline="none"
+              variant="h6"
+              sx={{ pointerEvents: "all" }}
+            />
+            <Stack direction="row" spacing={2}>
+              <Tooltip
+                title="Github"
+                arrow
+                sx={{ pointerEvents: "all" }}
+                children={
+                  <IconButton color="secondary">
+                    <GitHub />
+                  </IconButton>
+                }
+              />
+              <Tooltip
+                title="LinkedIn"
+                arrow
+                sx={{ pointerEvents: "all" }}
+                children={
+                  <IconButton color="secondary">
+                    <LinkedIn />
+                  </IconButton>
+                }
+              />
+              <Tooltip
+                title="Email"
+                arrow
+                sx={{ pointerEvents: "all" }}
+                children={
+                  <IconButton color="secondary">
+                    <Email />
+                  </IconButton>
+                }
+              />
+              <Tooltip
+                title="Instagram"
+                arrow
+                sx={{ pointerEvents: "all" }}
+                children={
+                  <IconButton color="secondary">
+                    <Instagram />
+                  </IconButton>
+                }
+              />
+            </Stack>
+          </Container>
         </Toolbar>
       </AppBar>
       <AppBar
@@ -45,53 +201,42 @@ const HomeOverlay: React.FC<Props> = () => {
         sx={{ bottom: 0, boxShadow: "none" }}
       >
         <Toolbar>
-          <Container sx={{ display: "flex", justifyContent: "space-around" }}>
-            <Typography children="WORK" color="#ffffff" variant="overline" />
-            <Typography children="ABOUT" color="#ffffff" variant="overline" />
-            <Typography children="CONTACT" color="#ffffff" variant="overline" />
+          <Container
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              maxWidth: "800px",
+            }}
+          >
+            <Link
+              href="/work"
+              children="WORK"
+              color="text.secondary"
+              underline="hover"
+              variant="subtitle1"
+              sx={{ pointerEvents: "all" }}
+            />
+            <Link
+              href="/about"
+              children="ABOUT"
+              color="text.secondary"
+              underline="hover"
+              variant="subtitle1"
+              sx={{ pointerEvents: "all" }}
+            />
+            <Link
+              href="/contact"
+              children="CONTACT"
+              color="text.secondary"
+              underline="hover"
+              variant="subtitle1"
+              sx={{ pointerEvents: "all" }}
+            />
           </Container>
-          <Stack direction="row" spacing={2}>
-            <Tooltip
-              title="Github"
-              arrow
-              children={
-                <IconButton color="secondary">
-                  <GitHub />
-                </IconButton>
-              }
-            />
-            <Tooltip
-              title="LinkedIn"
-              arrow
-              children={
-                <IconButton color="secondary">
-                  <LinkedIn />
-                </IconButton>
-              }
-            />
-            <Tooltip
-              title="Email"
-              arrow
-              children={
-                <IconButton color="secondary">
-                  <Email />
-                </IconButton>
-              }
-            />
-            <Tooltip
-              title="Instagram"
-              arrow
-              children={
-                <IconButton color="secondary">
-                  <Instagram />
-                </IconButton>
-              }
-            />
-          </Stack>
         </Toolbar>
       </AppBar>
     </Container>
   );
 };
 
-export default HomeOverlay;
+export default Overlay;

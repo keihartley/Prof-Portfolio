@@ -1,21 +1,25 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./Style/index.css";
 import App from "./Layout/App";
 import reportWebVitals from "./Other/reportWebVitals";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./Other/theme";
 import { Loader } from "@react-three/drei";
-import { Provider } from "react-redux";
-import store from "./Data/store";
+import { Leva } from "leva";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
-  <Provider store={store}>
-    <Suspense fallback={<Loader />}>
+  <ThemeProvider theme={theme}>
+    <Leva hidden />
+    <Suspense fallback={null}>
       <App />
     </Suspense>
-  </Provider>
+    <Loader />
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

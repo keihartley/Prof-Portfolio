@@ -1,15 +1,37 @@
-import CustomCard from "../../Components/Custom/Cards";
 import { Canvas } from "@react-three/fiber";
-import Lights from "../../Components/Custom/Lights";
+import HomeScene from "../../Components/Custom/Scenes";
+import React from "react";
+import { PortfolioEnv } from "../../Components/Custom/Environments";
+import { useTheme } from "@mui/material/styles";
+import Overlay from "../../Components/Custom/Overlays";
+import { Loader } from "@react-three/drei";
 
-interface Props {}
-
-const Portfolio: React.FC<Props> = () => {
+const Portfolio: React.FC = () => {
+  const { palette } = useTheme();
   return (
-    <Canvas>
-      <Lights hasStars={false} hasRig={false} />
-      <CustomCard colors={["#24242d", "#0a1727", "#272731"]} args={[1, 5]} speed={5} scale={[1, 1, 1]} size={100} />
-    </Canvas>
+    <>
+      <Canvas
+        shadows
+        dpr={[1, 2]}
+        camera={{ position: [0, 0, 10], fov: 22 }}
+        performance={{ min: 0.1 }}
+        gl={{ antialias: false }}
+      >
+        <color
+          attach="background"
+          args={[palette.background.default.toString()]}
+        />
+        <fog
+          attach="fog"
+          args={[palette.background.paper.toString(), 10, 10]}
+        />
+        <ambientLight intensity={0.5} />
+        <HomeScene />
+        <PortfolioEnv />
+      </Canvas>
+      <Loader />
+      <Overlay noTopNav={true} />
+    </>
   );
 };
 

@@ -1,8 +1,8 @@
 import { useGLTF, PresentationControls } from "@react-three/drei";
 import React from "react";
 import { useFrame } from "react-three-fiber";
-import { useControls } from "leva";
 import { useThree } from "@react-three/fiber";
+import { useWatchControls } from "../Hooks/useCustomControls";
 
 interface WatchProps {
   X: number;
@@ -12,26 +12,7 @@ interface WatchProps {
 
 export const Watch: React.FC<WatchProps> = (props) => {
   const { width } = useThree((state) => state.viewport);
-  const { X, Y, Z } = useControls("Watch", {
-    X: {
-      value: props.X,
-      min: -10,
-      max: 10,
-      step: 0.5,
-    },
-    Y: {
-      value: props.Y,
-      min: -10,
-      max: 10,
-      step: 0.5,
-    },
-    Z: {
-      value: props.Z,
-      min: -10,
-      max: 10,
-      step: 0.5,
-    },
-  });
+  const {X, Y, Z} = useWatchControls(props.X, props.Y, props.Z);
 
   const ref = React.createRef<THREE.Group>();
 

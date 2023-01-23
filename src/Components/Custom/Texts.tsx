@@ -1,39 +1,16 @@
 import { Text } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useControls } from "leva";
+import { useHeaderControls } from "../Hooks/useCustomControls";
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
   children: React.ReactNode;
+  position: number[];
 }
 
-export const Caption: React.FC<Props> = ({ children }) => {
-    const { X, Y, Z, lineHeight } = useControls("Text", {
-      X: {
-        value: 0,
-        min: -10,
-        max: 10,
-        step: 0.5,
-      },
-      Y: {
-        value: 0,
-        min: -10,
-        max: 10,
-        step: 0.5,
-      },
-      Z: {
-        value: 0,
-        min: -10,
-        max: 10,
-        step: 0.5,
-      },
-      lineHeight: {
-        value: 1.25,
-        min: 0,
-        max: 10,
-        step: 0.25,
-      },
-    });
-  
+export const HeaderText: React.FC<Props> = ({ children, position }) => {
+  const {palette} = useTheme();
+    const {lineHeight, X, Y, Z} = useHeaderControls(position);
     const { width } = useThree((state) => state.viewport);
   
     return (
@@ -41,10 +18,8 @@ export const Caption: React.FC<Props> = ({ children }) => {
         lineHeight={lineHeight}
         fontSize={width / 30}
         material-toneMapped={false}
-        anchorX="right"
-        anchorY="middle"
         position={[X, Y, Z]}
-        color="#A5C5E9"
+        color={palette.text.primary.toString()}
       >
         {children}
       </Text>

@@ -4,7 +4,7 @@ import { Euler } from 'three';
 
 interface Props {}
 
-const Env: React.FC<Props> = () => {
+export const HomeEnv: React.FC<Props> = () => {
   return (
     <Environment preset='dawn' resolution={512}>
       <Lightformer
@@ -73,4 +73,8 @@ const Env: React.FC<Props> = () => {
   );
 }
 
-export default Env;
+export const PortfolioEnv: React.FC = () => {
+  return (
+    <Environment preset='night' blur={0.7} near={1} far={1000} resolution={256}  />
+  );
+}

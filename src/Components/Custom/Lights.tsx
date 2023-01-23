@@ -3,6 +3,7 @@ import { useFrame } from "react-three-fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import { inSphere } from "maath/random";
 import { Vector3, Euler } from "three";
+import { useTheme } from '@mui/material/styles';
 
 interface RigProps {
   v?: THREE.Vector3;
@@ -55,11 +56,20 @@ const Stars: React.FC<Props> = ({ sphere }) => {
 };
 
 interface LightProps {
-  hasStars: boolean;
-  hasRig: boolean;
+  hasStars?: boolean;
+  hasRig?: boolean;
+  hasSpotlight?: boolean;
+  hasFog?: boolean;
+  hasHemisphereLight?: boolean;
 }
 
-const Lights: React.FC<LightProps> = ({ hasStars = false, hasRig = false }) => {
+const Lights: React.FC<LightProps> = ({
+  hasStars = false,
+  hasRig = false,
+  hasSpotlight = false,
+  hasFog = false,
+  hasHemisphereLight = false
+}) => {
   const [sphere] = useState(() => {
     const positions = new Float32Array(10_000 * 3);
     inSphere(positions, { radius: 8 });
@@ -74,19 +84,26 @@ const Lights: React.FC<LightProps> = ({ hasStars = false, hasRig = false }) => {
     }
     return sphere;
   });
+  const {palette} = useTheme();
 
   return (
     <>
-      <color attach="background" args={["#15151a"]} />
-      <fog attach="fog" args={[0xfff0ea, 10, 60]} />
-      <ambientLight intensity={0.5} />
-      <spotLight
-        position={[10, 10, 10]}
-        angle={0.15}
-        penumbra={1}
-        shadow-mapSize={[512, 512]}
-        castShadow={true}
-      />
+      <color attach="background" args={[palette.background.default.toString()]} />
+      {hasHemisphereLight && (
+        <hemisphereLight intensity={0.15} groundColor="black" />
+      )}
+      {hasFog && (
+        <fog attach="fog" args={[palette.secondary.main.toString(), 10, 10]} />
+      )}
+      {hasSpotlight && (
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.15}
+          penumbra={1}
+          shadow-mapSize={[512, 512]}
+          castShadow={true}
+        />
+      )}
       {hasRig && <Rig v={new Vector3(0, 0, 10)} />}
       {hasStars && <Stars sphere={sphere} />}
     </>

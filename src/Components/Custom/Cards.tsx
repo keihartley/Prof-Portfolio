@@ -5,30 +5,59 @@ import {
   useCursor,
 } from "@react-three/drei";
 import { MathUtils } from "three";
-import { useFrame, useThree } from "react-three-fiber";
-import { useControls } from "leva";
+import { useFrame, Vector3 } from "react-three-fiber";
+import { Vector2 } from "three/src/Three";
+import { folder, useControls } from "leva";
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
-  colors: string[];
-  args: number[];
-  scale: number[];
-  speed: number;
-  size: number;
+  position: Vector3;
+  w?: number;
+  h?: number;
+  project?: {name: string};
 }
 
-const CustomCard: React.FC<Props> = ({ colors, args, scale, speed, size }) => {
-  const { width } = useThree((state) => state.viewport);
-  const cardControl = useControls("Card", {
-    args: [width * 0.66, args[1]],
-    scale: [scale[0], scale[1], scale[2]],
-    speed: speed,
-    size: size,
+const CustomCard: React.FC<Props> = ({position, w, h}) => {
+  const {palette} = useTheme();
+  const ref = useRef<any>(null);
+  const [hovered, hover] = useState(false);
+
+  const {
+    speed,
+    rotation,
+    stops,
+    colorOne,
+    size,
+    center,
+    colorTwo
+  } = useControls("Card", {
+    scale: {
+      value: {
+        x: 1,
+        y: 1,
+        z: 1,
+      },
+      step: 0.1,
+    },
+    stops: [0.33, 0.66],
+    speed: 5,
+    size: 100,
+    Colors: folder({
+      colorOne: palette.background.paper.toString(),
+      colorTwo: "#49494D",
+      rotation: 90,
+    }),
+    center: {
+      value: {
+        x: 0.5,
+        y: 0.5
+      },
+      step: 0.1,
+    }
   });
 
-  const ref = useRef<any>(null);
-  console.log(ref);
-  const [hovered, hover] = useState(false);
   useCursor(hovered);
+  
   useFrame(() => {
     ref.current.distort = MathUtils.lerp(
       ref.current.distort,
@@ -41,14 +70,16 @@ const CustomCard: React.FC<Props> = ({ colors, args, scale, speed, size }) => {
     <mesh
       onPointerOver={() => hover(true)}
       onPointerOut={() => hover(false)}
-      scale={cardControl.scale}
+      position={position}
     >
-      <planeGeometry args={cardControl.args} />
+      <planeGeometry args={[w, h]} />
       <MeshDistortMaterial ref={ref} speed={speed}>
         <GradientTexture
-          stops={[0, 0.8, 1]}
-          colors={colors}
-          size={cardControl.size}
+          rotation={rotation}
+          center={new Vector2(center.x, center.y)}
+          stops={stops}
+          colors={[colorOne, colorTwo]}
+          size={size}
         />
       </MeshDistortMaterial>
     </mesh>
