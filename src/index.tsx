@@ -1,11 +1,9 @@
-import { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./Style/index.css";
 import App from "./Layout/App";
 import reportWebVitals from "./Other/reportWebVitals";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./Other/theme";
-import { Loader } from "@react-three/drei";
 import { Leva } from "leva";
 
 const root = ReactDOM.createRoot(
@@ -15,10 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={theme}>
     <Leva hidden />
-    <Suspense fallback={null}>
-      <App />
-    </Suspense>
-    <Loader />
+    <App />
   </ThemeProvider>
 );
 
