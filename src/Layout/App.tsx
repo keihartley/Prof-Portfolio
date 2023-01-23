@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomeOverlay from "../Components/Custom/CustomOverlay";
+import HomeOverlay from "../Components/Custom/Overlays";
 import Home from "./Pages/Home";
 import Portfolio from "./Pages/Portfolio";
 

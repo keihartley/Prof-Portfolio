@@ -1,9 +1,9 @@
 import { Canvas } from "react-three-fiber";
-import Env from "../../Components/Custom/CustomEnvironment";
-import Lights from "../../Components/Custom/CustomLights";
+import Env from "../../Components/Custom/Environments";
+import Lights from "../../Components/Custom/Lights";
 import { Suspense } from "react";
-import { Caption } from "../../Components/Custom/CustomCaption";
-import { Watch } from "../../Components/Custom/CustomModels";
+import { Caption } from "../../Components/Custom/Texts";
+import { Watch } from "../../Components/Custom/Models";
 
 interface Props {}
 

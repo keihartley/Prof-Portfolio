@@ -1,6 +1,6 @@
-import CustomCard from "../../Components/Custom/CustomCard";
+import CustomCard from "../../Components/Custom/Cards";
 import { Canvas } from "@react-three/fiber";
-import Lights from "../../Components/Custom/CustomLights";
+import Lights from "../../Components/Custom/Lights";
 
 interface Props {}
 
