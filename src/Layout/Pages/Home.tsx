@@ -1,7 +1,7 @@
 import { Canvas } from "react-three-fiber";
 import Lights from "../../Components/Custom/Lights";
 import { Suspense } from "react";
-import { Watch } from "../../Components/Custom/Models";
+import { Watch } from "../../Components/Custom/Models/Watch";
 import { HomeEnv } from "../../Components/Custom/Environments";
 import Overlay from "../../Components/Custom/Overlays";
 import { Loader } from "@react-three/drei";

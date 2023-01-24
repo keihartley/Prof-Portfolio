@@ -5,9 +5,13 @@ declare module '@mui/material/styles' {
       palette: {
         primary: {
           main: string,
+          light: string,
+          dark: string,
         },
         secondary: {
           main: string,
+          light: string,
+          dark: string,
         },
         background: {
           default: string,
@@ -16,7 +20,8 @@ declare module '@mui/material/styles' {
         text: {
           primary: string,
           secondary: string,
-        }
+        },
+        divider: string
       }
     }
   }

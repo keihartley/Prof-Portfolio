@@ -1,18 +1,10 @@
-import { Html } from "@react-three/drei";
+import { Html, useProgress } from "@react-three/drei";
 
-type ProgressProps = {
-  active: boolean;
-  errors: string[];
-  item: string;
-  loaded: number;
-  progress: number;
-  total: number;
-};
-
-const ProgressLoader: React.FC<ProgressProps> = (props: ProgressProps) => {
+const ProgressLoader: React.FC = () => {
+    const {progress} = useProgress();
     return (
         <Html center>
-            {props.progress} % loaded
+            {progress} % loaded
         </Html>
     );
 };
